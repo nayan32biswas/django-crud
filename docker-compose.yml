@@ -1,0 +1,20 @@
+version: "3.7"
+
+# environment
+x-volumes: &server-volume
+  HOST_URL: "http://localhost:8000"
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    image: nayan32biswas/django_crud:latest
+    container_name: django_crud
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    environment:
+      <<: *server-volume
+    volumes:
+      - ./server/:/app/server/
