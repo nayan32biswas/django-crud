@@ -3,6 +3,7 @@ version: "3.7"
 # environment
 x-volumes: &server-volume
   HOST_URL: "http://localhost:8000"
+  SECRET_KEY: "6r)%9(f7w_h3t2d_kh2+=-rhg+#8s*hl7k)yij=e=6)qxmz72z"
 
 services:
   server:
