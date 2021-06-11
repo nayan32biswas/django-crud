@@ -1,0 +1,39 @@
+{% url 'users:login' as login_url %}
+{% url 'users:logout' as logout_url %}
+{% url 'users:register' as register_url %}
+{% url 'users:profile' as user_profile %}
+{% url 'posts:create' as create_post %}
+
+<header class="site-header">
+  <nav class="navbar navbar-expand-md navbar-dark custom-navbar">
+    <div class="container">
+      <a class="navbar-brand mr-4" href="/">Blog</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <form method='GET' action='/products/' class='input-group search-box'>
+            <input class='form-control' type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}' />
+            <div class="input-group-append">
+              <button class='input-group-text' type='submit'><i class="fas fa-search"></i></button>
+            </div>
+          </form>
+        </div>
+        <!-- Search Box Start -->
+
+        <!-- Navbar Right Side -->
+        <div class="navbar-nav">
+          {% if request.user.is_authenticated %}
+          <a class="nav-item nav-link" href="{{ create_post }}">New Post</a>
+          <a class="nav-item nav-link" href="{{ user_profile }}">Account</a>
+          <a class="nav-item nav-link" href="{{ logout_url }}">Logout</a>
+          {% else %}
+          <a class="nav-item nav-link" href="{{ login_url }}">Login</a>
+          <a class="nav-item nav-link" href="{{ register_url }}">Register</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

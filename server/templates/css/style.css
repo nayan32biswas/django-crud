@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+body {
+  color: #fafafa;
+  text-align: center;
+}
+
+.wrapper {
+  width: 980px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+}
+a {
+  text-decoration: none;
+}
+p {
+  font-size: 1.2em;
+}
+img {
+  width: 100%;
+}
+.clear {
+  clear: both;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
