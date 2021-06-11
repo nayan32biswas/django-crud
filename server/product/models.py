@@ -31,7 +31,7 @@ class Product(models.Model):
     code = models.CharField(max_length=24, unique=True, blank=True)
     slug = models.SlugField(max_length=255, unique=True, allow_unicode=True)
     description = models.TextField(blank=True)
-    default_image = models.ImageField(upload_to="products")
+    default_image = models.ImageField(upload_to="products", blank=True)
     category = models.ForeignKey(
         Category,
         related_name="products",

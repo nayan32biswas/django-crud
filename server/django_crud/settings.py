@@ -63,6 +63,7 @@ MIDDLEWARE = [
 SITE_ID = 1
 ROOT_URLCONF = "django_crud.urls"
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+AUTH_USER_MODEL = "accounts.User"
 
 TEMPLATES = [
     {
