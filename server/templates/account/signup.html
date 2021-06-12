@@ -9,41 +9,45 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Sign In</h5>
-                    <form class="form-signin" method='POST' action=''>{% csrf_token %}
-                        <div class="form-label-group">
-                            <label for="email">Email*</label>
-                            {% render_field form.email|append_attr:"class:form-control" type="text" placeholder="email" %}
-                        </div>
-                        <div class="form-label-group">
-                            <label for="inputPassword">Password*</label>
-                            {% render_field form.password1|append_attr:"class:form-control" id="inputPassword" type="password" placeholder="Password" %}
-                        </div>
-                        <div class="form-label-group">
-                            <label for="inputPassword">Confirm Password*</label>
-                            {% render_field form.password2|append_attr:"class:form-control" id="inputPassword" type="password" placeholder="Password" %}
-                        </div>
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label" for="customCheck1">Remember password</label>
-                        </div>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
-                    </form>
-                    <div class="text-danger">
-                        {% for field, errors in form.errors.items %}
-                        {% for error in errors %}
-                        <p>{{error}}</p>
-                        {% endfor%}
-                        {% endfor%}
-                    </div>
-                </div>
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Sign In</h5>
+          <form class="form-signin" method='POST' action=''>{% csrf_token %}
+            <div class="form-label-group">
+              <label for="email">Email*</label>
+              {% render_field form.email|append_attr:"class:form-control" type="text" placeholder="email" %}
             </div>
+            <div class="form-label-group">
+              <label for="username">Username*</label>
+              {% render_field form.username|append_attr:"class:form-control" type="text" placeholder="username" %}
+            </div>
+            <div class="form-label-group">
+              <label for="inputPassword">Password*</label>
+              {% render_field form.password1|append_attr:"class:form-control" id="inputPassword" type="password" placeholder="Password" %}
+            </div>
+            <div class="form-label-group">
+              <label for="inputPassword">Confirm Password*</label>
+              {% render_field form.password2|append_attr:"class:form-control" id="inputPassword" type="password" placeholder="Password" %}
+            </div>
+            <div class="custom-control custom-checkbox mb-3">
+              <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Remember password</label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
+          </form>
+          <div class="text-danger">
+            {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+            <p>{{error}}</p>
+            {% endfor%}
+            {% endfor%}
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endblock %}

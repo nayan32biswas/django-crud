@@ -14,7 +14,7 @@ class OrderStatus(models.TextChoices):
 class Order(models.Model):
     created = models.DateTimeField(default=now, editable=False)
     status = models.CharField(
-        max_length=32, default=OrderStatus.UNFULFILLED, choices=OrderStatus.CHOICES
+        max_length=32, default=OrderStatus.UNFULFILLED, choices=OrderStatus.choices
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,

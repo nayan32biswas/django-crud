@@ -8,7 +8,6 @@ class UserManager(BaseUserManager):
     def create_user(
         self,
         email,
-        full_name=None,
         password=None,
         is_staff=False,
         is_active=True,
@@ -20,7 +19,6 @@ class UserManager(BaseUserManager):
             raise ValueError("Users must have a password")
         user_obj = self.model(
             email=self.normalize_email(email),
-            full_name=full_name,
         )
         user_obj.set_password(password)  # change user password
         user_obj.is_superuser = is_superuser
@@ -29,16 +27,15 @@ class UserManager(BaseUserManager):
         user_obj.save(using=self._db)
         return user_obj
 
-    def create_staffuser(self, email, full_name=None, password=None):
+    def create_staffuser(self, email, password=None):
         user = self.create_user(
-            email, full_name=full_name, password=password, is_staff=True
+            email,  password=password, is_staff=True
         )
         return user
 
-    def create_superuser(self, email, full_name=None, password=None):
+    def create_superuser(self, email, password=None):
         user = self.create_user(
             email=email,
-            full_name=full_name,
             password=password,
             is_staff=True,
             is_superuser=True,
@@ -85,11 +82,11 @@ class User(AbstractBaseUser):
     # def get_absolute_url(self):
     #     return reverse("accounts:profile", kwargs={"username": self.username})
 
-    # def has_perm(self, perm, obj=None):
-    #     return True
+    def has_perm(self, perm, obj=None):
+        return True
 
-    # def has_module_perms(self, app_label):
-    #     return True
+    def has_module_perms(self, app_label):
+        return True
 
 
 class Address(models.Model):

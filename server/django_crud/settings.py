@@ -46,7 +46,7 @@ THIRD_PARTY_APPS = [
     "widget_tweaks",
 ]
 
-LOCAL_APPS = ["accounts"]
+LOCAL_APPS = ["accounts", "checkout", "order", "product"]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -137,6 +137,7 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "staticfiles/media")
 MEDIA_URL = "/media/"
 
+ACCOUNT_EMAIL_VERIFICATION = "none"
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
