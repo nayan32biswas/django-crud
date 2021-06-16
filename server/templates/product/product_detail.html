@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block content %}
+{% load crispy_forms_tags %}
+
+<h2>Product</h2>
+<h1>{{ object.name }}</h1>
+<form method="POST">
+  {% csrf_token %} {{ form|crispy }}
+  <input type="submit" class="btn btn-primary" value="Add to cart." />
+  {% for error in form.non_field_errors %} {{error}} {% endfor %}
+</form>
+<p>{{ object.description }}</p>
+{% endblock %}

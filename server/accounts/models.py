@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 from django_crud.utils import generate_unique_slug
+from checkout.models import CheckoutLine
 
 
 class UserManager(BaseUserManager):
@@ -28,9 +29,7 @@ class UserManager(BaseUserManager):
         return user_obj
 
     def create_staffuser(self, email, password=None):
-        user = self.create_user(
-            email,  password=password, is_staff=True
-        )
+        user = self.create_user(email, password=password, is_staff=True)
         return user
 
     def create_superuser(self, email, password=None):
@@ -88,6 +87,10 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+    @property
+    def total_checkout_line(self):
+        return CheckoutLine.objects.filter(checkout__user_id=self.id).count()
+
 
 class Address(models.Model):
     full_name = models.CharField(max_length=255, blank=True)
@@ -98,3 +101,6 @@ class Address(models.Model):
     country = models.CharField(max_length=127)
     postal_code = models.CharField(max_length=20, blank=True)
     phone = models.CharField(max_length=20, blank=True)
+
+    def __str__(self) -> str:
+        return f"{self.full_name}, {self.phone} :: {self.postal_code}"

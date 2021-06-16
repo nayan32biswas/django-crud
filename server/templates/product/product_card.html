@@ -1,0 +1,4 @@
+<div>
+  <li>{{ product.name }} - {{ product.code }}</li>
+  <a href="{% url 'product:product-detail' slug=product.slug %}">Details</a>
+</div>

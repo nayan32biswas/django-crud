@@ -20,6 +20,9 @@ class Category(MPTTModel):
     objects = models.Manager()
     tree = TreeManager()
 
+    def __str__(self) -> str:
+        return f"{self.name}"
+
 
 class ProductsQueryset(models.QuerySet):
     def published(self):
@@ -68,8 +71,12 @@ class ProductImage(models.Model):
     class Meta:
         ordering = ("order", "pk")
 
+    def __str__(self) -> str:
+        return f"{self.order} :: {self.product}"
+
 
 class Warehouse(models.Model):
+    # Ware house ignored
     name = models.CharField(max_length=250)
     slug = models.SlugField(max_length=255, unique=True, allow_unicode=True)
     company_name = models.CharField(blank=True, max_length=255)
@@ -95,3 +102,6 @@ class Stock(models.Model):
 
     class Meta:
         unique_together = [["warehouse", "product"]]
+
+    def __str__(self) -> str:
+        return f"{self.warehouse} :: {self.product} :: {self.quantity}"

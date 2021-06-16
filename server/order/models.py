@@ -43,6 +43,9 @@ class Order(models.Model):
     class Meta:
         ordering = ("-pk",)
 
+    def __str__(self) -> str:
+        return f"{self.user}"
+
 
 class OrderLine(models.Model):
     order = models.ForeignKey(
@@ -65,3 +68,6 @@ class OrderLine(models.Model):
 
     class Meta:
         ordering = ("pk",)
+    
+    def __str__(self) -> str:
+        return f"{self.order} :: {self.product}"

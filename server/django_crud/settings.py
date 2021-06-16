@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "widget_tweaks",
+    "crispy_forms",
 ]
 
 LOCAL_APPS = ["accounts", "checkout", "order", "product"]

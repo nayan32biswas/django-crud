@@ -25,8 +25,7 @@ def get_rand_str(N=None):
     return secrets.token_hex(N)
 
 
-def generate_unique_slug(obj, text, slug_field="slug"):
-    model = obj.__class__
+def generate_unique_slug(model, text, slug_field="slug"):
     proposed_slug = slugify(text, allow_unicode=True)
     exists = model.objects.filter(
         **{f"{slug_field}__startswith": proposed_slug}
