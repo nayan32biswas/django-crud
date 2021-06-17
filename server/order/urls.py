@@ -13,7 +13,8 @@ urlpatterns = [
     ),
     path(
         "invoice/<int:pk>/",
-        login_required(views.OrderDetailView.as_view()),
+        login_required(views.GeneratePDF.as_view()),
         name="download-invoice",
     ),
+    path("invoice/qr-code/", views.index),
 ]
