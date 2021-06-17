@@ -3,8 +3,9 @@
 <h2>Products</h2>
 {% for order in object_list %}
 <div>{{ order.id }}</div>
+<a href="{% url 'order:order-detail' pk=order.id %}">Details</a>
 {% empty %}
-<li>No products yet.</li>
+<li>No Order yet.</li>
 {% endfor %}
 
 <div class="pagination">

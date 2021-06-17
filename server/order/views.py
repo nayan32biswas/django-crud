@@ -18,7 +18,6 @@ from . import models
 
 
 class OrderListView(ListView):
-
     model = models.Order
     paginate_by = 30
 
@@ -42,18 +41,18 @@ class OrderDetailView(DetailView):
 """ PDF """
 
 
-def index(request):
-    context = {}
-    if request.method == "POST":
-        factory = qrcode.image.svg.SvgImage
-        img = qrcode.make(
-            request.POST.get("qr_text", ""), image_factory=factory, box_size=20
-        )
-        stream = BytesIO()
-        img.save(stream)
-        context["svg"] = stream.getvalue().decode()
+# def index(request):
+#     context = {}
+#     if request.method == "POST":
+#         factory = qrcode.image.svg.SvgImage
+#         img = qrcode.make(
+#             request.POST.get("qr_text", ""), image_factory=factory, box_size=20
+#         )
+#         stream = BytesIO()
+#         img.save(stream)
+#         context["svg"] = stream.getvalue().decode()
 
-    return render(request, "index.html", context=context)
+#     return render(request, "index.html", context=context)
 
 
 def render_to_pdf(template_src, context_dict={}):
@@ -76,7 +75,7 @@ class GeneratePDF(View):
             "today": "Today",
         }
         # html = template.render(context)
-        pdf = render_to_pdf("invoice.html", context)
+        pdf = render_to_pdf("pdf/invoice.html", context)
         if pdf:
             response = HttpResponse(pdf, content_type="application/pdf")
             filename = "Invoice_%s.pdf" % ("12341231")

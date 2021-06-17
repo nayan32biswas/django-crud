@@ -11,4 +11,9 @@ urlpatterns = [
         login_required(views.OrderDetailView.as_view()),
         name="order-detail",
     ),
+    path(
+        "invoice/<int:pk>/",
+        login_required(views.OrderDetailView.as_view()),
+        name="download-invoice",
+    ),
 ]
