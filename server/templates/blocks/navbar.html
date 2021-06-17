@@ -3,6 +3,7 @@
 {% url 'accounts:register' as register_url %}
 {% url 'accounts:profile' as user_profile %}
 {% url 'product:product-list' as products %}
+{% url 'order:order-list' as orders %}
 
 <header class="site-header">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,8 +29,13 @@
           <li class="nav-item">
             <a class="nav-item nav-link" href="{{ logout_url }}">Logout</a>
           </li>
+          {% if request.user.checkout_url %}
           <li class="nav-item">
-            <a class="nav-item nav-link" href="/">Cart ({{ request.user.total_checkout_line  }})</a>
+            <a class="nav-item nav-link" href="{{ request.user.checkout_url }}">Cart ({{ request.user.total_checkout_line  }})</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-item nav-link" href="{{ orders }}">Order</a>
           </li>
           {% else %}
           <li class="nav-item">

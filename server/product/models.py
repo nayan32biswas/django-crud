@@ -1,3 +1,4 @@
+import json
 from django.db import models
 from django.conf import settings
 
@@ -58,6 +59,19 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def to_json(self):
+        return json.dumps(
+            {
+                "name": self.name,
+                "code": self.code,
+                "slug": self.slug,
+                "default_image": self.default_image.url,
+                "price": float(self.price),
+                "charge_taxes": self.charge_taxes,
+                "created_at": str(self.created_at),
+            }
+        )
 
 
 class ProductImage(models.Model):

@@ -36,6 +36,9 @@ class Checkout(models.Model):
     class Meta:
         ordering = ("-last_change", "pk")
 
+    def __str__(self) -> str:
+        return str(self.user)
+
 
 class CheckoutLine(models.Model):
 
@@ -46,3 +49,6 @@ class CheckoutLine(models.Model):
         "product.Product", related_name="+", on_delete=models.CASCADE
     )
     quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+
+    def __str__(self) -> str:
+        return f"{self.checkout} :: {self.product}"

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.urls import reverse
 
 from django_crud.utils import generate_unique_slug
 from checkout.models import CheckoutLine
@@ -94,6 +95,13 @@ class User(AbstractBaseUser):
             .aggregate(models.Sum("quantity"))
             .get("quantity__sum")
         )
+
+    @property
+    def checkout_url(self):
+        checkout = self.checkouts.first()
+        if checkout:
+            return reverse("checkout:checkout-detail", kwargs={"pk": checkout.id})
+        return None
 
 
 class Address(models.Model):

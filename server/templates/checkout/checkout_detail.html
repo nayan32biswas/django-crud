@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Checkout</h2>
+
+<h5>Product List</h5>
+{% for line in lines %}
+<div>{{line.product.name}}</div>
+<div>{{line.quantity}}</div>
+{% empty %}
+<li>No products yet.</li>
+{% endfor %}
+<br>
+<form method="POST">
+  {% csrf_token %} {{ form|crispy }}
+  <input type="submit" class="btn btn-primary" value="Checkout." />
+  {% for error in form.non_field_errors %} {{error}} {% endfor %}
+</form>
+{% endblock %}
