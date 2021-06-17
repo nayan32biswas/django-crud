@@ -89,7 +89,9 @@ class User(AbstractBaseUser):
 
     @property
     def total_checkout_line(self):
-        return CheckoutLine.objects.filter(checkout__user_id=self.id).count()
+        return CheckoutLine.objects.filter(checkout__user_id=self.id).aggregate(
+            models.Sum("quantity")
+        ).get("quantity__sum")
 
 
 class Address(models.Model):

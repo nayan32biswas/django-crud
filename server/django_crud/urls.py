@@ -15,7 +15,7 @@ urlpatterns = [
     path("checkout/", include((checkout_urls, "checkout"), namespace="checkout")),
     path("order/", include((order_urls, "order"), namespace="order")),
     path("product/", include((product_urls, "product"), namespace="product")),
-    path("", home_view),
+    path("", home_view, name="home"),
 ]
 
 
