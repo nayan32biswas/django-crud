@@ -1,9 +1,31 @@
 {% extends "base.html" %} {% block content %} {% load crispy_forms_tags %}
 
-<h2>Order Details</h2>
+<div class="container">
+  <div class="container">
+    <div class="invoice">
+      <a
+        href="{% url 'order:download-invoice' pk=order.id %}"
+        class="btn btn-primary"
+      >
+        Open Invoice
+      </a>
 
-<a href="{% url 'order:download-invoice' pk=order.id %}">Open Invoice</a>
-<a href="{% url 'order:download-invoice' pk=order.id %}?download=true"
-  >Download Invoice</a
->
+      <a
+        href="{% url 'order:download-invoice' pk=order.id %}?download=true"
+        class="btn btn-primary ml-3"
+      >
+        Download Invoice
+      </a>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    {% for line in order.lines.all %}
+    <div class="col-12">
+      <div>{% include "order/order_line_card.html" with line=line%}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
 {% endblock %}

@@ -1,0 +1,8 @@
+<div class="card w-100 mb-2">
+    <div class="card-body">
+        <h5 class="card-title">Order ID: #{{ order.id }}</h5>
+        <div>Tracking Code: {{order.tracking_code}}</div>
+        <div>Total Items: {{order.quantity}}</div>
+        <a href="{% url 'order:order-detail' pk=order.id %}" class="btn btn-primary">Details</a>
+    </div>
+</div>

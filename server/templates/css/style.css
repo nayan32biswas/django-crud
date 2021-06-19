@@ -6,3 +6,13 @@
 .carousel-image{
     max-height: 500px;
 }
+
+.invoice{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invoice a:first-child{
+  margin-right: 5px;
+}

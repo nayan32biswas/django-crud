@@ -17,7 +17,7 @@ def user_profile(request):
     context = {
         "user_data": user_data,
     }
-    return render(request, "accounts/profile.html", context)
+    return render(request, "account/profile.html", context)
 
 
 def logout_view(request):
