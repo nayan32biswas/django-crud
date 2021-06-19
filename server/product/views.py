@@ -78,17 +78,13 @@ class ProductDetailView(FormMixin, DetailView):
                         return super().form_invalid(form)
                     checkout_line.save()
             else:
-                # Create new checkout line
+                if quantity < 0 or self.stock.quantity < quantity:
+                    # if checkout line exists with this product then add it with
+                    form.add_error("quantity", "insufficient stock!")
+                    return super().form_invalid(form)
                 checkout_line = CheckoutLine.objects.create(
                     checkout=checkout, product=self.object, quantity=quantity
                 )
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-
-    def form_valid(self, form):
-        # Initailly validate is it valid quantity or not.
-        if self.stock.quantity < form.cleaned_data["quantity"]:
-            form.add_error("quantity", "insufficient stock!")
-            return super().form_invalid(form)
-        return super().form_valid(form)

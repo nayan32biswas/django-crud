@@ -91,11 +91,12 @@ class User(AbstractBaseUser):
 
     @property
     def total_checkout_line(self):
-        return (
+        value = (
             CheckoutLine.objects.filter(checkout__user_id=self.id)
             .aggregate(models.Sum("quantity"))
             .get("quantity__sum")
         )
+        return value if value else 0
 
     @property
     def checkout_url(self):
