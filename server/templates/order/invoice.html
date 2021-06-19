@@ -7,7 +7,8 @@
     <title>InVoice</title>
   </head>
   <body>
-    <div>Invoice</div>
-    <div>{{ qrcode|safe }}</div>
+    <div>Invoice with image</div>
+    <img src="{{ qrcode_path }}" alt="asdfasd">
+    <div>{{qrcode_path}}</div>
   </body>
 </html>

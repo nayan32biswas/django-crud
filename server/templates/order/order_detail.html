@@ -2,5 +2,8 @@
 
 <h2>Order Details</h2>
 
-<a href="{% url 'order:download-invoice' pk=order.id %}">Invoice</a>
+<a href="{% url 'order:download-invoice' pk=order.id %}">Open Invoice</a>
+<a href="{% url 'order:download-invoice' pk=order.id %}?download=true"
+  >Download Invoice</a
+>
 {% endblock %}
