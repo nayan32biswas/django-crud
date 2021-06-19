@@ -22,10 +22,10 @@
             </div>
             <div class="custom-control custom-checkbox mb-3">
               <input type="checkbox" class="custom-control-input" id="customCheck1">
-              <label class="custom-control-label" for="customCheck1">Remember password</label>
+              <!-- <label class="custom-control-label" for="customCheck1">Remember password</label> -->
             </div>
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-            <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+            <a class="button secondaryAction" href="{% url 'accounts:register' %}">{% trans "Sign Up" %}</a>
           </form>
           <div class="text-danger">
             {% for field, errors in form.errors.items %}
