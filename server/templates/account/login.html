@@ -20,10 +20,10 @@
               <label for="inputPassword">Password*</label>
               {% render_field form.password|append_attr:"class:form-control" type="password" placeholder="Password" %}
             </div>
-            <div class="custom-control custom-checkbox mb-3">
+            <!-- <div class="custom-control custom-checkbox mb-3">
               <input type="checkbox" class="custom-control-input" id="customCheck1">
-              <!-- <label class="custom-control-label" for="customCheck1">Remember password</label> -->
-            </div>
+              <label class="custom-control-label" for="customCheck1">Remember password</label>
+            </div> -->
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
             <a class="button secondaryAction" href="{% url 'accounts:register' %}">{% trans "Sign Up" %}</a>
           </form>
