@@ -1,6 +1,7 @@
 import os
 from io import BytesIO
 
+from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -38,13 +39,14 @@ class OrderDetailView(DetailView):
         return context
 
 
-def generate_qrcode(request, HOST, url, order_id):
+def generate_qrcode(request, url, order_id):
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
         border=4,
     )
+    HOST = settings.BROWSER_HOST
     qr.add_data(f"{HOST}{url}")
     qr.make(fit=True)
     img = qr.make_image(fill_color="#000", back_color="#FFFFFF")
@@ -82,10 +84,9 @@ class GeneratePDF(View):
         source_path = f"{source_dir}/{filename}"
 
         if not os.path.isfile(source_path):
-            HOST = "http://localhost:8000"
             url = reverse("order:order-detail", kwargs=kwargs)
             context = {
-                "qrcode_path": generate_qrcode(request, HOST, url, order.id),
+                "qrcode_path": generate_qrcode(request, url, order.id),
             }
             print(context)
             html_string = render_to_string("order/invoice.html", context).encode()
