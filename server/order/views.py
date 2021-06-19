@@ -24,20 +24,17 @@ class OrderListView(ListView):
     paginate_by = 30
 
     def get_queryset(self):
+        # find order for authenticated user.
         return self.model.objects.filter(user=self.request.user)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
 
 class OrderDetailView(DetailView):
     model = models.Order
-    paginate_by = 30
+    paginate_by = 20
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+    def get_queryset(self):
+        # find order for authenticated user.
+        return self.model.objects.filter(user=self.request.user)
 
 
 def generate_qrcode(request, url, order_id):
@@ -61,6 +58,7 @@ def generate_qrcode(request, url, order_id):
     media_dir = "media/qrcodes"
     source_dir = f"staticfiles/{media_dir}"
 
+    # Create dir if to exists.
     if not os.path.exists(source_dir):
         os.makedirs(source_dir)
 
@@ -68,6 +66,7 @@ def generate_qrcode(request, url, order_id):
     image_path = f"{source_dir}/{file_name}"
     url = f"{HOST}/{media_dir}/{file_name}"
 
+    # Write qrcode image to file.
     with open(image_path, "wb") as f:
         f.write(qr_image_content.getbuffer())
     return url
@@ -78,6 +77,7 @@ class GeneratePDF(View):
         order = get_object_or_404(models.Order, id=kwargs["pk"])
 
         source_dir = "staticfiles/media/pdf"
+        # Create dir if not exists.
         if not os.path.exists(source_dir):
             os.makedirs(source_dir)
         filename = f"{order.id}.pdf"
@@ -86,6 +86,7 @@ class GeneratePDF(View):
         if not os.path.isfile(source_path):
             lines = []
             order_total_price = 0
+            # store all order line info for this order.
             for idx, line in enumerate(order.lines.all().prefetch_related("product")):
                 lines.append(
                     {
@@ -99,13 +100,16 @@ class GeneratePDF(View):
                 order_total_price += int(line.unit_price_net_amount)
             url = reverse("order:order-detail", kwargs=kwargs)
             context = {
+                # serve qrcode image from file
                 "qrcode_path": generate_qrcode(request, url, order.id),
                 "lines": lines,
                 "order_total_price": order_total_price,
-                "total_in_word": num2words(order_total_price).capitalize()
+                "total_in_word": num2words(order_total_price).capitalize(),
             }
+            # render html file with qrcode image
             html_string = render_to_string("order/invoice.html", context).encode()
             html = HTML(string=html_string)
+            # generate pdf file and same it to the directory.
             html.write_pdf(target=f"{source_dir}/{filename}")
 
         fs = FileSystemStorage(f"{source_dir}")

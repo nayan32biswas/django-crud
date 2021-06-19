@@ -13,9 +13,8 @@ from . import models
 fake = Faker()
 
 
-class CheckoutDetailView(DetailView):  # FormMixin,
+class CheckoutDetailView(DetailView):
     model = models.Checkout
-    # form_class = forms.CheckoutProceedForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

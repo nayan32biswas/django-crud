@@ -1,23 +1,6 @@
 import secrets
 import random
-import math
-import re
-
-from django.utils.html import strip_tags
 from django.utils.text import slugify
-
-
-def count_words(html_string):
-    word_string = strip_tags(html_string)
-    matching_words = re.findall(r"\w+", word_string)
-    count = len(matching_words)  # joincfe.com/projects/
-    return count
-
-
-def get_read_time(html_string):
-    count = count_words(html_string)
-    read_time_min = math.ceil(count / 200.0)  # assuming 200wpm reading
-    return int(read_time_min)
 
 
 def get_rand_str(N=None):

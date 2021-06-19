@@ -7,6 +7,10 @@ from mptt.models import MPTTModel
 
 
 class Category(MPTTModel):
+    """
+    mptt model is a data structure that help to manage parent chield relation and retrive fast.
+    """
+
     name = models.CharField(max_length=250)
     slug = models.SlugField(max_length=255, unique=True, allow_unicode=True)
     description = models.TextField(blank=True)
@@ -115,6 +119,7 @@ class Stock(models.Model):
     quantity = models.PositiveIntegerField(default=0)
 
     class Meta:
+        # unique together to prevent duplicate entry
         unique_together = [["warehouse", "product"]]
 
     def __str__(self) -> str:
