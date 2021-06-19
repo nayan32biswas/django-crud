@@ -1,5 +1,7 @@
 # Project setup guidelines
 
+- `git clone git@github.com:nayan32biswas/django-crud.git` Clone the project and navigate the folder by command line.
+
 ## Run Project With Docker.
 
 1. `docker-compose build server` First build server service.
@@ -12,7 +14,7 @@
 
 1. Install venv from [here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
 2. Navigate to the project directory and activate venv.
-3. `cd server/` navigate to manage.py file.
+3. `cd server/` navigate to server directory where the manage.py file located.
 4. `pip install -r requirements.txt` Install required package.
 5. `manage.py createsuperuser` Create Superuser if needed.
 6. `python manage.py populate_data` Create 100 products with related categories and stock if needed.

@@ -12,7 +12,12 @@ fake = Faker()
 
 
 def get_image():
-    images = ["landscape__47.jpg", "portrait__23.jpg", "square__42.jpg"]
+    images = [
+        "square__77.jpg",
+        "square__125.jpeg",
+        "square__604.jpg",
+        "square__6500.jpg",
+    ]
     image_name = random.choice(images)
     image_dir = "product/management/commands/images"
     img_path = os.path.join(image_dir, image_name)

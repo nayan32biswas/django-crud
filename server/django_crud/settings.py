@@ -66,9 +66,9 @@ SITE_ID = 1
 ROOT_URLCONF = "django_crud.urls"
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 AUTH_USER_MODEL = "accounts.User"
-LOGIN_REDIRECT_URL = reverse_lazy('home')
-LOGIN_URL = reverse_lazy('accounts:login')
-LOGOUT_URL = reverse_lazy('accounts:custom-logout')
+LOGIN_REDIRECT_URL = reverse_lazy("home")
+LOGIN_URL = reverse_lazy("accounts:login")
+LOGOUT_URL = reverse_lazy("accounts:custom-logout")
 
 TEMPLATES = [
     {
@@ -136,11 +136,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/static")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/static/")
 STATIC_URL = "/static/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "staticfiles/media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "staticfiles/media/")
 MEDIA_URL = "/media/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "templates/"), ]
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 AUTHENTICATION_BACKENDS = [

@@ -1,29 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-body {
-  text-align: center;
+.pagination {
+  display: flex;
+  justify-content: center !important;
 }
 
-a {
-  text-decoration: none;
-}
-p {
-  font-size: 1.2em;
-}
-img {
-  width: 100%;
-}
-.clear {
-  clear: both;
-}
-
-.right {
-  float: right;
-}
-
-.left {
-  float: left;
+.carousel-image{
+    max-height: 500px;
 }

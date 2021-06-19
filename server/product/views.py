@@ -18,7 +18,8 @@ fake = Faker()
 class ProductListView(ListView):
 
     model = models.Product
-    paginate_by = 30  # Pagination to display limited order for each page.
+    # Pagination to display limited order for each page.
+    paginate_by = 20
 
     def get_queryset(self):
         object_list = self.model.objects.all()

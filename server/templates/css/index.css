@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+body {
+}
+
+a {
+  text-decoration: none;
+}
+p {
+  font-size: 1.2em;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+.clear {
+  clear: both;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}

@@ -1,27 +1,33 @@
-{% extends "base.html" %} {% block content %}
-<h2>Products</h2>
-{% for product in object_list %}
-<div>{% include "product/product_card.html" with product=product%}</div>
-{% empty %}
-<li>No products yet.</li>
-{% endfor %}
+{% extends "base.html" %}
+{% block content %}
 
-<div class="pagination">
-  <span class="step-links">
-      {% if page_obj.has_previous %}
-          <a href="?page=1">&laquo; first</a>
-          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-      {% endif %}
+<div class="container">
+    <div class="row">
+    {% for product in object_list %}
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+            <div>{% include "product/product_card.html" with product=product%}</div>
+        </div>
+    {% empty %}
+    <li>No products yet.</li>
+    {% endfor %}
+    </div>
 
-      <span class="current">
-          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-      </span>
-
-      {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}">next</a>
-          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-      {% endif %}
-  </span>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+        
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+        
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 </div>
-
 {% endblock %}
