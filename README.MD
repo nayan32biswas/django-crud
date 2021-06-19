@@ -8,7 +8,8 @@
 2. `docker-compose run --rm server python manage.py migrate` Initialize DB/Create DB.
 3. `docker-compose run --rm server python manage.py createsuperuser` Create Superuser if needed.
 4. `docker-compose run --rm server python manage.py populate_data` Create 100 products with related categories and stock if needed.
-5. `docker-compose up server` Run Project with this command and [visit here](http://localhost:8000).
+5. `docker-compose run --rm server python manage.py collectstatic` Load static files.
+6. `docker-compose up server` Run Project with this command and [visit here](http://localhost:8000).
 
 
 ## Setup Project with venv.
@@ -20,4 +21,5 @@
 5. `python manage.py migrate`  Initialize DB/Create DB.
 6. `manage.py createsuperuser` Create Superuser if needed.
 7. `python manage.py populate_data` Create 100 products with related categories and stock if needed.
-8. `python manage.py runserver` Run Project with this command and [visit here](http://localhost:8000).
+8. `python manage.py collectstatic` Load static files.
+9. `python manage.py runserver` Run Project with this command and [visit here](http://localhost:8000).
