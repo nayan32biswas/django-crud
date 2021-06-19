@@ -13,9 +13,11 @@ django-crispy-forms==1.12.0
 django-js-asset==1.2.2
 django-mptt==0.12.0
 django-widget-tweaks==1.4.8
+docopt==0.6.2
 Faker==8.8.1
 html5lib==1.1
 idna==2.10
+num2words==0.5.10
 oauthlib==3.1.1
 Pillow==8.2.0
 pycparser==2.20

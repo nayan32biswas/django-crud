@@ -5,10 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InVoice</title>
+    <!-- width: 100%; -->
+    <style>
+      table td {
+        border-left: 1px solid #000;
+        border-right: 1px solid #000;
+      }
+      table,
+      th {
+        width: 100%;
+        text-align: center;
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th.sl-no {
+        width: 15%;
+      }
+      th.item {
+        width: 40%;
+      }
+      th.price,
+      th.qty,
+      th.total {
+        width: 15%;
+      }
+      td.set-border {
+        border: 1px solid black;
+      }
+      tbody {
+        min-height: 500px;
+      }
+    </style>
   </head>
   <body>
-    <div>Invoice with image</div>
-    <img src="{{ qrcode_path }}" alt="asdfasd">
-    <div>{{qrcode_path}}</div>
+    <div>
+      <img src="{{ qrcode_path }}" alt="asdfasd" />
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th class="sl-no">SL.<br />NO.</th>
+            <th class="item">Item</th>
+            <th class="price">Unit Price</th>
+            <th class="qty">QTY</th>
+            <th class="total">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for line in lines %}
+          <tr>
+            <td>{{line.sl_no}}</td>
+            <td style="text-align: left">{{line.name}}</td>
+            <td>{{line.price}}</td>
+            <td>{{line.quantity}}</td>
+            <td>{{line.total_price}}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="4" class="set-border" style="text-align: left">
+              Amount in words: {{total_in_word}} taka only
+            </td>
+            <td class="set-border">{{order_total_price}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

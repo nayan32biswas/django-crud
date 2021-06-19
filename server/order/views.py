@@ -14,6 +14,7 @@ from django.views.generic.list import ListView
 import qrcode
 import qrcode.image.svg
 from weasyprint import HTML
+from num2words import num2words
 
 from . import models
 
@@ -51,7 +52,7 @@ def generate_qrcode(request, url, order_id):
     qr.make(fit=True)
     img = qr.make_image(fill_color="#000", back_color="#FFFFFF")
     img = img.get_image()
-    img.thumbnail((200, 200))
+    img.thumbnail((400, 400))
     PIL_TYPE = "PNG"
     qr_image_content = BytesIO()
     img.save(qr_image_content, format=PIL_TYPE, quality=100)
@@ -82,13 +83,27 @@ class GeneratePDF(View):
         filename = f"{order.id}.pdf"
 
         source_path = f"{source_dir}/{filename}"
-
         if not os.path.isfile(source_path):
+            lines = []
+            order_total_price = 0
+            for idx, line in enumerate(order.lines.all().prefetch_related("product")):
+                lines.append(
+                    {
+                        "sl_no": idx,
+                        "name": line.product.name,
+                        "price": int(line.product.price),
+                        "quantity": line.quantity,
+                        "total_price": int(line.unit_price_net_amount),
+                    }
+                )
+                order_total_price += int(line.unit_price_net_amount)
             url = reverse("order:order-detail", kwargs=kwargs)
             context = {
                 "qrcode_path": generate_qrcode(request, url, order.id),
+                "lines": lines,
+                "order_total_price": order_total_price,
+                "total_in_word": num2words(order_total_price).capitalize()
             }
-            print(context)
             html_string = render_to_string("order/invoice.html", context).encode()
             html = HTML(string=html_string)
             html.write_pdf(target=f"{source_dir}/{filename}")
