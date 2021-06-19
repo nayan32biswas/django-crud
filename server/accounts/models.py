@@ -72,7 +72,7 @@ class User(AbstractBaseUser):
     def save(self, *args, **kwargs):
         if not self.username:
             # Create unique user name.
-            self.username = generate_unique_slug(self, self.email, "username")
+            self.username = generate_unique_slug(User, self.email, "username")
         super().save(*args, **kwargs)
 
     def __str__(self):
