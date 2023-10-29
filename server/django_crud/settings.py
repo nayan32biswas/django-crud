@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "widget_tweaks",
     "crispy_forms",
+    "crispy_bootstrap4",
 ]
 
 LOCAL_APPS = ["accounts", "checkout", "order", "product"]
@@ -60,7 +61,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
+
 
 SITE_ID = 1
 ROOT_URLCONF = "django_crud.urls"
@@ -141,7 +145,9 @@ STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "staticfiles/media/")
 MEDIA_URL = "/media/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "templates/"), ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "templates/"),
+]
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 AUTHENTICATION_BACKENDS = [
@@ -154,5 +160,6 @@ AUTHENTICATION_BACKENDS = [
 DEFAULT_MAX_DIGITS = 10
 DEFAULT_DECIMAL_PLACES = 3
 
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 BROWSER_HOST = os.environ.get("BROWSER_HOST", "http://localhost:8000")

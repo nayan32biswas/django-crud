@@ -1,0 +1,21 @@
+# ============================== Common Files & Folder To ignore ==============================
+env
+.env**
+.venv**
+**.bak
+*.log
+**.sock
+**.out
+**.exe
+
+# ============================== Django ==============================
+# Staticfiles
+server/staticfiles/media/**
+server/staticfiles/static/**
+server/staticfiles/debug_log/**
+
+
+# ============================== Editor's ==============================
+# Visual Studio Code
+.vscode/
+.vscode/**

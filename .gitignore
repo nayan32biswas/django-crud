@@ -1,4 +1,5 @@
 # ============================== Common Files & Folder To ignore ==============================
+env
 .env**
 .venv**
 **.bak

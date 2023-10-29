@@ -3,7 +3,7 @@ version: "3.7"
 # environment
 x-volumes: &server-volume
   BROWSER_HOST: "http://localhost:8000"
-  SECRET_KEY: "6r)%9(f7w_h3t2d_kh2+=-rhg+#8s*hl7k)yij=e=6)qxmz72z"
+  SECRET_KEY: "b8e94e40e79ddd8cfd508c7ae36b8fa17b5a1e58e4b80e75bb0e193df8c4333b"
 
 services:
   server:
